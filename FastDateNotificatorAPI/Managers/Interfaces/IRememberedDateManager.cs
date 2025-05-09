@@ -8,6 +8,7 @@ public interface IRememberedDateManager
 {
     Task<Result> AddAsync(AddDateDto addDate);
     Task<Result<RememberedDate>> GetAsync(long id);
+    Task<Result<ICollection<long>>> GetAllUserIdAsync();
     Task<Result<ICollection<RememberedDate>>> GetForUserAsync(long telegramId);
     Task<Result<RememberedDate>> PatchAsync(PatchDateDto patchDate);
     Task<Result<RememberedDate>> UpdateAsync(UpdateDateDto updateDate);
