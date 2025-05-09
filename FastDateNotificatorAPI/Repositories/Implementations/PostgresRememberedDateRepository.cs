@@ -38,6 +38,7 @@ public class PostgresRememberedDateRepository (DataContext dataContext) : IRemem
     {
         var list = await _dataContext.RememberedDates
             .Where(x => x.TelegramId == telegramId)
+            .OrderBy(x => x.Date)
             .ToListAsync();
 
         return Result<ICollection<RememberedDate>>.Success(list);
