@@ -1,0 +1,31 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "FastDateNotificatorAPI";
+
+package remembered_date;
+
+service RememberedDateService {
+  rpc GetAllUserIds (Empty) returns (UserIdsResponse);
+  rpc GetForUser (UserRequest) returns (UserDatesResponse);
+}
+
+message Empty {}
+
+message UserRequest {
+  int64 telegramId = 1;
+}
+
+message UserIdsResponse {
+  repeated int64 ids = 1;
+}
+
+message RememberedDateDto {
+  int64 id = 1;
+  int64 telegramId = 2;
+  string name = 3;
+  string date = 4; // ISO 8601 (e.g., "2025-05-09")
+}
+
+message UserDatesResponse {
+  repeated RememberedDateDto dates = 1;
+}
