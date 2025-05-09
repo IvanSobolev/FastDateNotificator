@@ -8,7 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos\remembered_date.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos\common.proto" GrpcServices="None" Link="Protos\common.proto" />
+        <Protobuf Include="Protos\background_service_db.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos\telegram_bot_date_db.proto" GrpcServices="Server" />
     </ItemGroup>
     
     <ItemGroup>

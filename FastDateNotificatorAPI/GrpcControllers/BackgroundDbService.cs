@@ -1,9 +1,13 @@
-﻿using FastDateNotificatorAPI.Managers.Interfaces;
+﻿using FastDateNotificatorAPI.BackgroundServiceDb;
+using FastDateNotificatorAPI.CommonProtos;
+using FastDateNotificatorAPI.Managers.Interfaces;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
+using BackgroundService = FastDateNotificatorAPI.BackgroundServiceDb.BackgroundService;
 
 namespace FastDateNotificatorAPI.GrpcControllers;
 
-public class RememberedDateService(IRememberedDateManager manager) : FastDateNotificatorAPI.RememberedDateService.RememberedDateServiceBase
+public class BackgroundDbService (IRememberedDateManager manager) : BackgroundService.BackgroundServiceBase
 {
     private readonly IRememberedDateManager _manager = manager;
 
@@ -24,7 +28,7 @@ public class RememberedDateService(IRememberedDateManager manager) : FastDateNot
         var result = await _manager.GetForUserAsync(request.TelegramId);
 
         if (!result.IsSuccess)
-            throw new RpcException(new Status(StatusCode.Internal, result .Error));
+            throw new RpcException(new Status(StatusCode.Internal, result.Error));
 
         var response = new UserDatesResponse();
         response.Dates.AddRange(result.Value.Select(d => new RememberedDateDto
