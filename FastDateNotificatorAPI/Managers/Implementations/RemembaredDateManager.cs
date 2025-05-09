@@ -20,6 +20,11 @@ public class RemembaredDateManager (IRememberedDateRepository repository) : IRem
         return await _repository.GetAsync(id);
     }
 
+    public async Task<Result<ICollection<long>>> GetAllUserIdAsync()
+    {
+        return await _repository.GetAllUserIdAsync();
+    }
+    
     public async Task<Result<ICollection<RememberedDate>>> GetForUserAsync(long telegramId)
     {
         return await _repository.GetForUserAsync(telegramId);
