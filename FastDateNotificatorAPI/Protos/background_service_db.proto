@@ -1,0 +1,17 @@
+﻿syntax = "proto3";
+
+import "Protos/common.proto";
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "FastDateNotificatorAPI.BackgroundServiceDb";
+
+package background_service_db;
+
+service BackgroundService {
+  rpc GetAllUserIds (google.protobuf.Empty) returns (UserIdsResponse);
+  rpc GetForUser (common.UserRequest) returns (common.UserDatesResponse);
+}
+
+message UserIdsResponse {
+  repeated int64 ids = 1;
+}

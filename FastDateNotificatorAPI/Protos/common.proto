@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "FastDateNotificatorAPI.CommonProtos";
+
+package common;
+
+message UserRequest {
+  int64 telegramId = 1;
+}
+
+message RememberedDateDto {
+  int64 id = 1;
+  int64 telegramId = 2;
+  string name = 3;
+  string date = 4; // ISO 8601 (e.g., "2025-05-09")
+}
+
+message UserDatesResponse {
+  repeated RememberedDateDto dates = 1;
+}

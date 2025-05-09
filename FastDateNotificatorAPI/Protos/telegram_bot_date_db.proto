@@ -1,0 +1,41 @@
+﻿syntax = "proto3";
+
+import "Protos/common.proto";
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "FastDateNotificatorAPI.TelegramBotDateDb";
+
+package telegram_bot_date_db;
+
+service TelegramBotService {
+  rpc AddDate (AddDateRequest) returns (google.protobuf.Empty);
+  rpc GetDate (IdRequest) returns (common.RememberedDateDto);
+  rpc GetForUser (common.UserRequest) returns (common.UserDatesResponse);
+  rpc PatchDate (PatchDateRequest) returns (common.RememberedDateDto);
+  rpc UpdateDate (UpdateDateRequest) returns (common.RememberedDateDto);
+  rpc DeleteDate (IdRequest) returns (google.protobuf.Empty);
+}
+
+message IdRequest {
+  int64 id = 1;
+}
+
+
+message AddDateRequest {
+  int64 telegramId = 1;
+  string name = 2;
+  string date = 3;
+}
+
+message PatchDateRequest {
+  int64 id = 1;
+  optional string name = 2;
+  optional string date = 3;
+}
+
+message UpdateDateRequest {
+  int64 id = 1;
+  int64 telegramId = 2;
+  string name = 3;
+  string date = 4;
+}
