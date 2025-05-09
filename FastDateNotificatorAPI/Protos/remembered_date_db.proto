@@ -1,0 +1,58 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "FastDateNotificatorAPI.Grpc";
+
+package remembered_date_db;
+
+service RememberedDateDbService {
+  rpc AddDate (AddDateRequest) returns (EmptyResponse);
+  rpc GetDate (IdRequest) returns (RememberedDateDto);
+  rpc GetForUser (UserRequest) returns (UserDatesResponse);
+  rpc PatchDate (PatchDateRequest) returns (RememberedDateDto);
+  rpc UpdateDate (UpdateDateRequest) returns (RememberedDateDto);
+  rpc DeleteDate (IdRequest) returns (EmptyResponse);
+}
+
+// ==== Requests ====
+
+message IdRequest {
+  int64 id = 1;
+}
+
+message UserRequest {
+  int64 telegramId = 1;
+}
+
+message AddDateRequest {
+  int64 telegramId = 1;
+  string name = 2;
+  string date = 3;
+}
+
+message PatchDateRequest {
+  int64 id = 1;
+  optional string name = 2;
+  optional string date = 3;
+}
+
+message UpdateDateRequest {
+  int64 id = 1;
+  int64 telegramId = 2;
+  string name = 3;
+  string date = 4;
+}
+
+// ==== DTOs & Responses ====
+
+message RememberedDateDto {
+  int64 id = 1;
+  int64 telegramId = 2;
+  string name = 3;
+  string date = 4;
+}
+
+message UserDatesResponse {
+  repeated RememberedDateDto dates = 1;
+}
+
+message EmptyResponse {}
