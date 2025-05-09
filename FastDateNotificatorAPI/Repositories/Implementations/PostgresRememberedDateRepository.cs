@@ -34,6 +34,16 @@ public class PostgresRememberedDateRepository (DataContext dataContext) : IRemem
             : Result<RememberedDate>.Failure("Remembered date not found.", 404);
     }
 
+    public async Task<Result<ICollection<long>>> GetAllUserIdAsync()
+    {
+        var ids = await _dataContext.RememberedDates
+            .Select(x => x.TelegramId)
+            .Distinct()
+            .ToListAsync();
+
+        return Result<ICollection<long>>.Success(ids);
+    }
+
     public async Task<Result<ICollection<RememberedDate>>> GetForUserAsync(long telegramId)
     {
         var list = await _dataContext.RememberedDates
