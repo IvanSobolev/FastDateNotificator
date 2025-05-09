@@ -1,0 +1,6 @@
+@FastDateNotificatorAPI_HostAddress = http://localhost:5037
+
+GET {{FastDateNotificatorAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
